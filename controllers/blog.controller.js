@@ -4,7 +4,41 @@ const Op = db.Sequelize.Op;
 
 // controller method to create and save a new blog to the postgresql database
 exports.create = (req, res) => {
+    // check if the request body has title
+    if (!req.body.title) {
+        res.status(400).send({
+            message: "Title can not be empty!"
+        });
+    }
 
+    // check if the request body has description
+    if (!req.body.description) {
+        res.status(400).send({
+            message: "Description can not be empty!"
+        });
+    }
+    // check if the request body has url
+    if (!req.body.url) {
+        res.status(400).send({
+            message: "URL can not be empty!"
+        });
+    }
+
+    // create a blog object
+    const blog = {
+        title: req.body.title,
+        description: req.body.description,
+        url: req.body.url,
+        published: req.body.published ? req.body.published : false
+    };
+
+    Blog.create(blog).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Blog."
+        });
+    });
 };
 
 /**
