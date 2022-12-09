@@ -62,7 +62,25 @@ exports.findAll = (req, res) => {
 /**
  * controller method to find a single blog with an id
  */
-exports.findOne = (req, res) => {};
+exports.findOne = (req, res) => {
+    // get the id from the request params
+    const id = req.params.id;
+
+    // find a single blog with the id
+    Blog.findByPk(id).then(data => {
+        if(data){
+            res.send(data);
+        }else{
+            res.status(404).send({
+                message: `Cannot find Blog with id=${id}.`
+            });
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: `Error retrieving Blog with id=${id}.`
+        });
+    });
+};
 
 /**
  * controller method to update a blog by the id in the request
