@@ -85,7 +85,29 @@ exports.findOne = (req, res) => {
 /**
  * controller method to update a blog by the id in the request
  */
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+    // get the id from the request params
+    const id = req.params.id;
+
+    // update a blog by the id in the request
+    Blog.update(req.body, {
+        where: { id: id }
+    }).then(number => {
+        if(number == 1){
+            res.send({
+                message: `Blog with id=${id} was updated successfully.`
+            });
+        }else{
+            res.send({
+                message: `Cannot update Blog with id=${id}. Maybe Blog was not found or req.body is empty!`
+            })
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: `Error updating Blog with id=${id}.`
+        });
+    });
+};
 
 /**
  * controller method to delete a blog with the specified id in the request
