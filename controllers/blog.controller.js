@@ -112,7 +112,28 @@ exports.update = (req, res) => {
 /**
  * controller method to delete a blog with the specified id in the request
  */
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+    // get the id from the request params
+    const id = req.params.id;
+
+    Blog.destroy({
+        where: { id: id }
+    }).then(number => {
+        if(number == 1){
+            res.send({
+                message: `Blog with id=${id} was deleted successfully.`
+            });
+        }else{
+            res.send({
+                message: `Unable to delete Blog with id=${id}. Blog was not found!`
+            });
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: `Could not delete Blog with id=${id}.`
+        })
+    })
+};
 
 /**
  * controller method to delete all blogs from the database
