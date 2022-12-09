@@ -1,5 +1,5 @@
 const db = require("../models");
-const Blog = db.blog;
+const Blog = db.blogs;
 const Op = db.Sequelize.Op;
 
 // controller method to create and save a new blog to the postgresql database
