@@ -157,4 +157,12 @@ exports.deleteAll = (req, res) => {
 /**
  * controller method to find all published blogs
  */
-exports.findAllPublished = (req, res) => {};
+exports.findAllPublished = (req, res) => {
+    Blog.findAll({ where: { published: true } }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving blogs."
+        });
+    });
+};
