@@ -43,8 +43,20 @@ exports.create = (req, res) => {
 
 /**
  * controller method to retrieve all blogs from the database
+ * Retrieve all blogs by a specific title
  */
-exports.findAll = (req, res) => {};
+exports.findAll = (req, res) => {
+    const title = req.body.title;
+    let condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
+
+    Blog.findAll({ where: condition }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving blogs."
+        });
+    });
+};
 
 
 /**
