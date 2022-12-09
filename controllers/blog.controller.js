@@ -46,7 +46,7 @@ exports.create = (req, res) => {
  * Retrieve all blogs by a specific title
  */
 exports.findAll = (req, res) => {
-    const title = req.body.title;
+    const title = req.query.title;
     let condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
 
     Blog.findAll({ where: condition }).then(data => {
