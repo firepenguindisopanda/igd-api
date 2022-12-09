@@ -10,7 +10,7 @@ const Role = db.role;
 
 
 const app = express();
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 8080;
 
 db.sequelize.sync({ force: true }).then(() => {
     console.log('Drop and Resync Db');
