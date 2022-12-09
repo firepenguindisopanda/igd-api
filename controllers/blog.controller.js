@@ -138,7 +138,21 @@ exports.delete = (req, res) => {
 /**
  * controller method to delete all blogs from the database
  */
-exports.deleteAll = (req, res) => {};
+exports.deleteAll = (req, res) => {
+    // using truncate() method to delete all rows
+    Blog.destroy({
+        where: {},
+        truncate: false
+    }).then(numbers => {
+        res.send({
+            message: `${numbers} Blogs were deleted successfully!`
+        });
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while removing all blogs."
+        });
+    });
+};
 
 /**
  * controller method to find all published blogs
