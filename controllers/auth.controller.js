@@ -57,9 +57,10 @@ exports.signin = (req, res) => {
                 message: "Invalid Password!"
             });
         }
-        let token = jwt.sign({ id: user.id }, config.secret, {
-            expiresIn: 86400 // 24 hours
+        const token = jwt.sign({ id: user.id }, config.secret, {
+            expiresIn: config.jwtExpiration
         });
+        let refreshToken = await RefreshToken.createToken(user);
         let authorities = [];
         user.getRoles().then(roles => {
             for(const element of roles){
@@ -70,10 +71,46 @@ exports.signin = (req, res) => {
                 username: user.username,
                 email: user.email,
                 roles: authorities,
-                accessToken: token
+                accessToken: token,
+                refreshToken: refreshToken
             });
         });
     }).catch(err => {
         res.status(500).send({ message: err.message });
     });
 };
+
+exports.refreshToken = async (req, res) => {
+    const { refreshToken: requestToken } = req.body;
+    if(requestToken == null) {
+        return res.status(403).json({ message: "Refresh Token is required!" });
+    }
+
+    try {
+        const refreshToken = await RefreshToken.findOne({
+            where: { token: requestToken }
+        });
+        console.log(refreshToken);
+        if(!refreshToken){
+            res.status(403).json({ message: "Refresh token is not in database!" });
+        }
+
+        if(RefreshToken.verifyExpiration(refreshToken)){
+            RefreshToken.destroy({
+                where: { id: refreshToken.id }
+            });
+            res.status(403).json({ message: "Refresh token was expired. Please make a new signin request" });
+        }
+        const user = await refreshToken.getUser();
+        let newAccessToken = jwt.sign({ id: user.id }, config.secret, {
+            expiresIn: config.jwtExpiration,
+        });
+
+        return res.status(200).json({
+            accessToken: newAccessToken,
+            refreshToken: refreshToken.token,
+        });
+    }catch(err) {
+        return res.status(500).send({ message: err.message });
+    }
+}
