@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
+const RefreshToken = db.refreshToken;
 const Op = db.Sequelize.Op;
 
 let jwt = require("jsonwebtoken");
@@ -42,11 +43,11 @@ exports.signin = (req, res) => {
         where: {
             username: req.body.username
         }
-    }).then(user => {
+    }).then(async (user) => {
         if(!user){
             return res.status(404).send({ message: "User Not Found." });
         }
-        let passwordIsValid = bcrypt.compareSync(
+        const passwordIsValid = bcrypt.compareSync(
             req.body.password,
             user.password
         );
