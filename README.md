@@ -10,6 +10,6 @@ Intergalactic Digital Api
 
 ## ToDo
 
-- [] setup models for new tables
-- [] decide on new models for database
-- [] research system designs
+- [ ] setup models for new tables
+- [ ] decide on new models for database
+- [ ] research system designs
