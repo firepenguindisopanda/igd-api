@@ -53,7 +53,6 @@ require('./routes/user.routes')(app);
 // routes for blog
 require('./routes/blog.routes')(app);
 
-
 app.use(errorHandler);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
