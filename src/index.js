@@ -1,11 +1,11 @@
 const express = require('express');
 const path = require('path');
-const { logger, logEvents } = require('./middleware/logger');
-const { errorHandler } = require('./middleware/errorHandler');
+const { logger, logEvents } = require('../middleware/logger');
+const { errorHandler } = require('../middleware/errorHandler');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const corsOptions = require('./config/corsOptions');
-const db = require('./models');
+const corsOptions = require('../config/corsOptions');
+const db = require('../models');
 const Role = db.role;
 
 
@@ -47,11 +47,11 @@ app.get("/", (req, res) => {
 
 
 // routes for auth and users
-require('./routes/auth.routes')(app);
-require('./routes/user.routes')(app);
+require('../routes/auth.routes')(app);
+require('../routes/user.routes')(app);
 
 // routes for blog
-require('./routes/blog.routes')(app);
+require('../routes/blog.routes')(app);
 
 app.use(errorHandler);
 app.listen(PORT, () => {
