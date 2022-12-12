@@ -12,4 +12,5 @@ Intergalactic Digital Api
 
 - [ ] setup models for new tables
 - [ ] decide on new models for database
+- [ ] decide on if to implement pagination for blog data
 - [ ] research system designs
