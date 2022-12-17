@@ -14,19 +14,30 @@ exports.moderatorBoard = (req, res) => {
     res.status(200).send("Moderator Content.");
 };
 
-exports.knapsackProblem = (capacity, items = []) => {
-    const matrix = [];
-    for (let i = 0; i < items.length; i++) {
-        matrix[i] = [];
+/**
+ * @brief Picking up all those items whose combined weight is below
+ * the given capacity and calculating the value of those picked items. Trying all
+ * possible combinations will yield the maximum knapsack value.
+ * @param n size of the weight and value array
+ * @param capacity capacity of the carrying bag
+ * @param weight array representing the weight of items
+ * @param value array representing the value of items
+ * @return maximum value obtainable with a given capacity.
+ */
+exports.knapsackProblem = (n, capacity, weight, value) => {
+    let matrix = [];
+    for (let i = 0; i <= n; i++) {
+        let row = [];
         for (let j = 0; j <= capacity; j++) {
-            if (i === 0) {
-                matrix[i][j] = 0;
-            } else if (items[i].weight > j) {
-                matrix[i][j] = matrix[i - 1][j];
+            if (i == 0 || j == 0) {
+                row.push(0);
+            } else if (weight[i - 1] <= j) {
+                row.push(Math.max(value[i - 1] + matrix[i - 1][j - weight[i - 1]], matrix[i - 1][j]));
             } else {
-                matrix[i][j] = Math.max(matrix[i - 1][j], matrix[i - 1][j - items[i].weight] + items[i].value);
+                row.push(matrix[i - 1][j]);
             }
         }
+        matrix.push(row);
     }
-    return matrix;
-}
+    return matrix[n][capacity];
+};
