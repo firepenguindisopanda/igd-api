@@ -8,6 +8,10 @@ Intergalactic Digital Api
 - cors options file
 - db config file for postgresql
 
+## Routes Documentation
+
+Routes thh=at provide users with data.
+
 ## ToDo
 
 - [ ] setup models for new tables
