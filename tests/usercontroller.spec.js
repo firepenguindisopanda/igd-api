@@ -1,24 +1,16 @@
 const chai = require('chai');
 const expect = chai.expect;
+const { knapsackProblem } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
     describe('knapsackProblem', () => {
-        it('should return correct matrix', () => {
-            const capacity = 5;
-            const items = [
-                { weight: 1, value: 1 },
-                { weight: 2, value: 6 },
-                { weight: 3, value: 10 },
-                { weight: 2, value: 3 }
-            ];
-            const matrix = [
-                [0, 0, 0, 0, 0, 0],
-                [0, 1, 1, 1, 1, 1],
-                [0, 1, 6, 7, 7, 7],
-                [0, 1, 6, 10, 11, 16],
-                [0, 1, 6, 10, 11, 16]
-            ];
-            expect(knapsackProblem(capacity, items)).to.deep.equal(matrix);
-        });
+        it('it should return 220 when number of items: 3, weight of each item: {10, 20, 30}, value of each item: {60, 100, 120}, capacity: 50', () => {
+            let n = 3;
+            let capacity = 50;
+            let weight = [10, 20, 30];
+            let value = [60, 100, 120];
+            let result = knapsackProblem(n, capacity, weight, value);
+            expect(result).to.equal(220);
+        })
     });
 });
