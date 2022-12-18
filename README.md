@@ -10,7 +10,7 @@ Intergalactic Digital Api
 
 ## Routes Documentation
 
-Routes thh=at provide users with data.
+Routes that provide users with data.
 
 ## ToDo
 
