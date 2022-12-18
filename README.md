@@ -18,3 +18,7 @@ Routes that provide users with data.
 - [ ] decide on new models for database
 - [ ] decide on if to implement pagination for blog data
 - [ ] research system designs
+
+## Tests
+
+- Test to check if a user is created successfully
