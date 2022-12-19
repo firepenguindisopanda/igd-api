@@ -41,3 +41,23 @@ exports.knapsackProblem = (n, capacity, weight, value) => {
     }
     return matrix[n][capacity];
 };
+
+/**
+ * You have m types of coins available in infinite quantities
+where the value of each coins is given in the array S=[S0,... Sm-1]
+Can you determine number of ways of making change for n units using
+the given types of coins?
+ */
+exports.minCoinChange = (coins, amount) => {
+    let combinations = [];
+    for (let i = 0; i <= amount; i++) {
+        combinations.push(0);
+    }
+    combinations[0] = 1;
+    for (const element of coins) {
+        for (let j = element; j <= amount; j++) {
+            combinations[j] += combinations[j - element];
+        }
+    }
+    return combinations[amount];
+}
