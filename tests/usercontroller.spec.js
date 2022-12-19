@@ -1,6 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
-const { knapsackProblem } = require('../controllers/user.controller');
+const { knapsackProblem, minCoinChange } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
     describe('knapsackProblem', () => {
@@ -11,6 +11,15 @@ describe('User Controller', () => {
             let value = [60, 100, 120];
             let result = knapsackProblem(n, capacity, weight, value);
             expect(result).to.equal(220);
+        })
+    });
+
+    describe('minCoinChange', () => {
+        it('it should return 4 when number of coins: 3, coins: {1, 2, 3}, amount: 4', () => {
+            let coins = [1, 2, 3];
+            let amount = 4;
+            let result = minCoinChange(coins, amount);
+            expect(result).to.equal(4);
         })
     });
 });
