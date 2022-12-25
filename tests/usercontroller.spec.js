@@ -1,6 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
-const { knapsackProblem, minCoinChange } = require('../controllers/user.controller');
+const { knapsackProblem, minCoinChange, canPartition } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
     describe('knapsackProblem', () => {
@@ -22,4 +22,17 @@ describe('User Controller', () => {
             expect(result).to.equal(4);
         })
     });
+
+    describe('canPartition', () => {
+        it('it should return true when nums: [1, 5, 11, 5]', () => {
+            let nums = [1, 5, 11, 5];
+            let result = canPartition(nums);
+            expect(result).to.equal(true);
+        })
+        it('it should return false when nums: [1, 2, 3, 5]', () => {
+            let nums = [1, 2, 3, 5];
+            let result = canPartition(nums);
+            expect(result).to.equal(false);
+        })
+    })
 });
