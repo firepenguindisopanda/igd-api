@@ -61,3 +61,41 @@ exports.minCoinChange = (coins, amount) => {
     }
     return combinations[amount];
 }
+
+/**
+ * Leetcode 416. Partition Equal Subset Sum
+ * Given a non-empty array of only positive integers, find if the array can be
+ * partitioned into two subsets such that the sum of elements in both subsets is
+ * equal.
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+exports.canPartition = (nums) => {
+    // if sum is odd, then it cannot be partitioned into two equal sum subsets
+    let sum = 0;
+    let target = 0;
+    for (const element of nums) {
+        sum += element;
+    }
+    if (sum % 2 != 0) {
+        return false;
+    }
+    // if sum is even, then find a subset of array with sum equal to half of total sum
+    target = sum / 2;
+    // create a set to store the sum of all the subsets
+    let set = new Set(); // set is used to store the sum of all the subsets
+    set.add(0); // add 0 to the set
+    for (const element of nums) {   // iterate through all the elements of the array
+        let temp = new Set();   // create a temporary set to store the sum of all the subsets
+        for (const item of set) {   // iterate through all the elements of the set
+            if (item + element == target) { // if the sum of the current item in the set variable and the current element from the nums array is equal to target, return true
+                return true;    // return true
+            }
+            temp.add(item + element);   // add the sum of the current item in the set variable and the current element from the nums array to the temp set variable
+        }
+        for (const item of temp) {  // iterate through all the elements of the temp set
+            set.add(item);  // add the current item in the temp set to the set variable
+        }
+    }
+    return false;   // return false
+};
