@@ -158,6 +158,24 @@ exports.quickSort = (nums) => {
         }
     }
     return nums;
+};
+
+const partition = (nums, start, end) => {
+    let pivot = nums[end];
+    let pIndex = start;
+    for (let i = start; i < end; i++) {
+        if (nums[i] <= pivot) {
+            swap(nums, i, pIndex);
+            pIndex++;
+        }
+    }
+    swap(nums, pIndex, end);
+    return pIndex;
+}
+const swap = (nums, i, j) => {
+    let temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
 }
 
 exports.quickSortRecursive = (nums) => {
@@ -175,4 +193,4 @@ exports.quickSortRecursive = (nums) => {
         }
     }
     return this.quickSortRecursive(left).concat(pivot, this.quickSortRecursive(right));
-}
+};
