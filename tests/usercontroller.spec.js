@@ -1,6 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
-const { knapsackProblem, minCoinChange, canPartition } = require('../controllers/user.controller');
+const { knapsackProblem, minCoinChange, canPartition, mergeSort } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
     describe('knapsackProblem', () => {
@@ -33,6 +33,14 @@ describe('User Controller', () => {
             let nums = [1, 2, 3, 5];
             let result = canPartition(nums);
             expect(result).to.equal(false);
+        })
+    });
+
+    describe("Merge Sort Testing", () => {
+        it("it should return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] when array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]", () => {
+            let array = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+            let result = mergeSort(array);
+            expect(result).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         })
     })
 });
