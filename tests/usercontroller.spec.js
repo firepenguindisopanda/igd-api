@@ -1,6 +1,13 @@
 const chai = require('chai');
 const expect = chai.expect;
-const { knapsackProblem, minCoinChange, canPartition, mergeSort } = require('../controllers/user.controller');
+const { 
+    knapsackProblem, 
+    minCoinChange, 
+    canPartition, 
+    mergeSort,
+    quickSort,
+    quickSortRecursive 
+} = require('../controllers/user.controller');
 
 describe('User Controller', () => {
     describe('knapsackProblem', () => {
@@ -41,6 +48,25 @@ describe('User Controller', () => {
             let array = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
             let result = mergeSort(array);
             expect(result).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        })
+    });
+    describe("Quick Sort Testing", () => {
+        it("it should return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] when array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]", () => {
+            let array = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+            let result = quickSort(array);
+            expect(result).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        })
+        it("it should return [0, 2, 2, 3, 5] when array: [0, 5, 3, 2, 2]", () => {
+            let array = [0, 5, 3, 2, 2];
+            let result = quickSort(array);
+            expect(result).to.eql([0, 2, 2, 3, 5]);
+        })
+    });
+    describe("Quick Sort Recursive Testing", () => {
+        it("it should return [-2, 5, 0, -45] when array: [-45, -2, 0, 5]", () => {
+            let array = [-45, -2, 0, 5];
+            let result = quickSortRecursive(array);
+            expect(result).to.eql([-45, -2, 0, 5]);
         })
     })
 });
