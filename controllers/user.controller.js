@@ -132,3 +132,47 @@ const merge = (left, right) => {
     }
     return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
+
+/**
+ * QuickSort implementation
+ * @param {number[]} nums
+ * @return {number[]}
+ * @brief QuickSort is a divide and conquer algorithm, this will be used to sort numbers in ascending order.
+ * Using the iterative approach
+ */
+exports.quickSort = (nums) => {
+    let stack = [];
+    stack.push(0);
+    stack.push(nums.length - 1);
+    while (stack.length > 0) {
+        let end = stack.pop();
+        let start = stack.pop();
+        let pivot = partition(nums, start, end);
+        if (pivot - 1 > start) {
+            stack.push(start);
+            stack.push(pivot - 1);
+        }
+        if (pivot + 1 < end) {
+            stack.push(pivot + 1);
+            stack.push(end);
+        }
+    }
+    return nums;
+}
+
+exports.quickSortRecursive = (nums) => {
+    if (nums.length <= 1) {
+        return nums;
+    }
+    let pivot = nums[nums.length - 1];
+    let left = [];
+    let right = [];
+    for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] < pivot) {
+            left.push(nums[i]);
+        } else {
+            right.push(nums[i]);
+        }
+    }
+    return this.quickSortRecursive(left).concat(pivot, this.quickSortRecursive(right));
+}
