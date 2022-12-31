@@ -6,7 +6,8 @@ const {
     canPartition, 
     mergeSort,
     quickSort,
-    quickSortRecursive 
+    quickSortRecursive,
+    binarySearch
 } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
@@ -67,6 +68,21 @@ describe('User Controller', () => {
             let array = [-45, -2, 0, 5];
             let result = quickSortRecursive(array);
             expect(result).to.eql([-45, -2, 0, 5]);
+        })
+    });
+
+    describe("Binary Search Testing", () => {
+        it("it should return 3 when array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], target: 4", () => {
+            let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            let target = 4;
+            let result = binarySearch(array, target);
+            expect(result).to.equal(3);
+        })
+        it("it should return -1 when array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], target: 11", () => {
+            let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            let target = 11;
+            let result = binarySearch(array, target);
+            expect(result).to.equal(-1);
         })
     })
 });
