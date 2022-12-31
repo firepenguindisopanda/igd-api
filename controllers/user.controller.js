@@ -194,3 +194,38 @@ exports.quickSortRecursive = (nums) => {
     }
     return this.quickSortRecursive(left).concat(pivot, this.quickSortRecursive(right));
 };
+
+/**
+ * Binary Search Implementation
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number} index of val in array or return -1 if not found
+ * Binary search works on sorted arrays
+ * Worst-case time complexity: O(log n)
+ * Best-case time complexity: O(1)
+ * Average time complexity: O(log n)
+ * Worst-case space complexity: O(1)
+ * @brief Given a sorted array of n elements and a target, this function searches for target in the array using the binary search algorithm.
+ * It returns the index in which the target is found or -1 if the target is not found.
+ * Search the array by dividing the array into two halves and then comparing the target with the middle element of the array.
+ * Set start index to 0 and end index to length of array - 1.
+ * If the target is equal to the middle element, return the middle index.
+ * If the target is greater than the middle element, then consider the right half of the array.
+ * If the target is less than the middle element, then consider the left half of the array.
+ */
+exports.binarySearch = (nums, target) => {
+    
+    let start = 0;
+    let end = nums.length - 1;
+    while (start <= end) {
+        let mid = Math.floor((start + end) / 2);
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] < target) {
+            start = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
+    return -1;
+}
