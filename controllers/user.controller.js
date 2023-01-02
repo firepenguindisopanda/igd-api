@@ -229,3 +229,54 @@ exports.binarySearch = (nums, target) => {
     }
     return -1;
 }
+
+/**
+ * KMP Search Implementation
+ * @param {string} text
+ * @param {string} pattern
+ * @return {number} index of pattern in text or return -1 if not found
+ * 
+ */
+exports.kmpSearch = (text, pattern) => {
+    let lps = computeLPS(pattern);
+    let i = 0;
+    let j = 0;
+    while (i < text.length) {
+        if (text[i] == pattern[j]) {
+            i++;
+            j++;
+        }
+        if (j == pattern.length) {
+            return i - j;
+        } else if (i < text.length && text[i] != pattern[j]) {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                i++;
+            }
+        }
+    }
+    return -1;
+}
+
+const computeLPS = (pattern) => {
+    let lps = [];
+    lps[0] = 0;
+    let i = 1;
+    let j = 0;
+    while (i < pattern.length) {
+        if (pattern[i] == pattern[j]) {
+            j++;
+            lps[i] = j;
+            i++;
+        } else {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+    return lps;
+}
