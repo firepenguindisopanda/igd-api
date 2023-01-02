@@ -7,7 +7,8 @@ const {
     mergeSort,
     quickSort,
     quickSortRecursive,
-    binarySearch
+    binarySearch,
+    kmpSearch
 } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
@@ -82,6 +83,21 @@ describe('User Controller', () => {
             let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             let target = 11;
             let result = binarySearch(array, target);
+            expect(result).to.equal(-1);
+        })
+    });
+
+    describe("KMP Search Testing", () => {
+        it("it should return 10 when text: 'ABABDABACDABABCABAB', pattern: 'ABABCABAB'", () => {
+            let text = 'ABABDABACDABABCABAB';
+            let pattern = 'ABABCABAB';
+            let result = kmpSearch(text, pattern);
+            expect(result).to.equal(10);
+        })
+        it("it should return -1 when text: 'ABABDABACDABABCABAB', pattern: 'ABABCABABCD'", () => {
+            let text = 'ABABDABACDABABCABAB';
+            let pattern = 'ABABCABABCD';
+            let result = kmpSearch(text, pattern);
             expect(result).to.equal(-1);
         })
     })
