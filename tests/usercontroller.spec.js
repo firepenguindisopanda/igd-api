@@ -8,7 +8,8 @@ const {
     quickSort,
     quickSortRecursive,
     binarySearch,
-    kmpSearch
+    kmpSearch,
+    longestCommonSubsequence
 } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
@@ -99,6 +100,15 @@ describe('User Controller', () => {
             let pattern = 'ABABCABABCD';
             let result = kmpSearch(text, pattern);
             expect(result).to.equal(-1);
+        })
+    })
+
+    describe("Longest Common Subsequence Testing", () => {
+        it("it should return 4 when text1: 'AGGTAB', text2: 'GXTXAYB'", () => {
+            let text1 = 'AGGTAB';
+            let text2 = 'GXTXAYB';
+            let result = longestCommonSubsequence(text1, text2);
+            expect(result).to.equal(4);
         })
     })
 });
