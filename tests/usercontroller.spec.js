@@ -9,7 +9,8 @@ const {
     quickSortRecursive,
     binarySearch,
     kmpSearch,
-    longestCommonSubsequence
+    longestCommonSubsequence,
+    knapSackProblem
 } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
