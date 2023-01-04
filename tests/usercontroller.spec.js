@@ -112,4 +112,22 @@ describe('User Controller', () => {
             expect(result).to.equal(4);
         })
     })
+
+    describe("Knapsack Problem Testing", () => {
+        it("it should return 220 when number of items: 3, weight of each item: {10, 20, 30}, value of each item: {60, 100, 120}, capacity: 50", () => {
+            
+            let capacity = 50;
+            let weight = [10, 20, 30];
+            let value = [60, 100, 120];
+            let result = knapSackProblem(capacity, weight, value);
+            expect(result).to.equal(220);
+        })
+        it("it should return 36 when number of items: 4, weight of each item: {24, 10, 10, 7}, value of each item: {24, 18, 18, 10}, capacity: 25", () => {
+            let capacity = 25;
+            let weight = [24, 10, 10, 7];
+            let value = [24, 18, 18, 10];
+            let result = knapSackProblem(capacity, weight, value);
+            expect(result).to.equal(36);
+        })
+    });
 });
