@@ -297,3 +297,34 @@ exports.longestCommonSubsequence = (text1, text2) => {
     }
     return dp[text1.length][text2.length];
 }
+
+/**
+ * 0 1 Knapsack Problem Implementation
+ * Given weights and values of n items, put these in a knapsack
+ * of capacity W to get the maximum value of the items in the knapsack.
+ * 
+ * i.e: Given two integer arrays values[0...n-1] and weights[0...n-1],
+ * that represesnts the values of each n items andweights of each n items,
+ * Also given an integer W which represents the capacity of the knapsack,
+ * find the maximum value subset of values such that the sum of the weights of
+ * the subset is smaller than or equal to W.
+ * 0-1 property means an item is chosen as a whole either pick the item or not (*don't break the item)
+ * @param {number} W
+ * @param {number[]} wt
+ * @param {number[]} val
+ * @return {number} maximum value of the items in the knapsack
+ */
+
+exports.knapSackProblem = (W, wt, val) => {
+    let dp = new Array(wt.length + 1).fill(0).map(() => new Array(W + 1).fill(0));
+    for (let i = 1; i <= wt.length; i++) {
+        for (let j = 1; j <= W; j++) {
+            if (wt[i - 1] <= j) {
+                dp[i][j] = Math.max(dp[i - 1][j], val[i - 1] + dp[i - 1][j - wt[i - 1]]);
+            } else {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+    return dp[wt.length][W];
+}
