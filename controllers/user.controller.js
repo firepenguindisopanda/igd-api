@@ -328,3 +328,49 @@ exports.knapSackProblem = (W, wt, val) => {
     }
     return dp[wt.length][W];
 }
+
+/**
+ * Permutation String Implementation
+ * @function Given two strings string1 and string2, return true if s2 contains the permutation of s1.
+ * @param {string} s1 - the input string
+ * @param {string} s2 - the input string
+ * @return {boolean} true if s2 contains the permutation of s1, false otherwise
+ */
+exports.permutationString = (string1, string2) => {
+    if (string1.length > string2.length) {
+        return false;
+    }
+    let map = new Map();
+    for (let i = 0; i < string1.length; i++) {
+        if (map.has(string1[i])) {
+            map.set(string1[i], map.get(string1[i]) + 1);
+        } else {
+            map.set(string1[i], 1);
+        }
+    }
+    let count = map.size;
+    let start = 0;
+    let end = 0;
+    while (end < string2.length) {
+        if (map.has(string2[end])) {
+            map.set(string2[end], map.get(string2[end]) - 1);
+            if (map.get(string2[end]) == 0) {
+                count--;
+            }
+        }
+        end++;
+        while (count == 0) {
+            if (end - start == string1.length) {
+                return true;
+            }
+            if (map.has(string2[start])) {
+                map.set(string2[start], map.get(string2[start]) + 1);
+                if (map.get(string2[start]) > 0) {
+                    count++;
+                }
+            }
+            start++;
+        }
+    }
+    return false;
+}
