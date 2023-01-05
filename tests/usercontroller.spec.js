@@ -10,7 +10,8 @@ const {
     binarySearch,
     kmpSearch,
     longestCommonSubsequence,
-    knapSackProblem
+    knapSackProblem,
+    permutationString
 } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
@@ -130,4 +131,12 @@ describe('User Controller', () => {
             expect(result).to.equal(36);
         })
     });
+    describe("Permutation String Testing", () => {
+        it("it should return true if string1=ab and string2=eidbaooo", () => {
+            let string1 = 'ab';
+            let string2 = 'eidbaooo';
+            let result = permutationString(string1, string2);
+            expect(result).to.equal(true);
+        })
+    })
 });
