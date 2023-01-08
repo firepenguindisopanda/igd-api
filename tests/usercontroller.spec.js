@@ -11,7 +11,8 @@ const {
     kmpSearch,
     longestCommonSubsequence,
     knapSackProblem,
-    permutationString
+    permutationString,
+    longestPalindromicSubstring
 } = require('../controllers/user.controller');
 
 describe('User Controller', () => {
@@ -138,5 +139,22 @@ describe('User Controller', () => {
             let result = permutationString(string1, string2);
             expect(result).to.equal(true);
         })
+    })
+    describe("Longest Palindromic Substring", () => {
+        it("it should return bab when string: babad", () => {
+            let string = 'babad';
+            let result = longestPalindromicSubstring(string);
+            expect(result).to.equal('bab');
+        })
+        it("it should return bb when string: cbbd", () => {
+            let string = 'cbbd';
+            let result = longestPalindromicSubstring(string);
+            expect(result).to.equal('bb');
+        })
+        it("it should return anana when string: bananas", () => {
+            let string = 'bananas';
+            let result = longestPalindromicSubstring(string);
+            expect(result).to.equal('anana');
+        });
     })
 });
