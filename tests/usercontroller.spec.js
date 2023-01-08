@@ -141,10 +141,10 @@ describe('User Controller', () => {
         })
     })
     describe("Longest Palindromic Substring", () => {
-        it("it should return bab when string: babad", () => {
+        it("it should return aba when string: babad", () => {
             let string = 'babad';
             let result = longestPalindromicSubstring(string);
-            expect(result).to.equal('bab');
+            expect(result).to.equal('aba');
         })
         it("it should return bb when string: cbbd", () => {
             let string = 'cbbd';
